@@ -18,4 +18,10 @@ return {
 			vim.keymap.set("n", "<c-g>", ":LazyGit<CR>", { noremap = true, silent = true })
 		end
 	},
+	{
+    "FabijanZulj/blame.nvim",
+    config = function()
+      require("blame").setup()
+    end
+  },
 }

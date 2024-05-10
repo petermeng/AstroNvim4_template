@@ -554,6 +554,42 @@ return {
           require("dial.map").dec_gnormal(),
           { noremap = true, desc = "Global descrease" }
         )
+        vim.keymap.set(
+          "n",
+          "N",
+          "Nzzzv",
+          { noremap = true, desc = "search word down, and cursor in the middle of the screen" }
+        )
+        vim.keymap.set(
+          "n",
+          "n",
+          "nzzzv",
+          { noremap = true, desc = "search word up, and cursor in the middle of the screen" }
+        )
+        vim.keymap.set(
+          "n",
+          "<leader>uD",
+          "<cmd>Telescope undo<cr>",
+          { noremap = true, desc = "Open undo Tree" }
+        )
+        vim.keymap.set(
+          "n",
+          "<leader>ga",
+          "<cmd>lua _LAZYGIT_TOGGLE()<cr>",
+          { noremap = true, desc = "Open Lazygit" }
+        )
+        vim.keymap.set(
+          "n",
+          "<leader>Ls",
+          "<cmd>lua vim.g.cscope_maps_db_file=\"./.exvim.yproject/cscope.out\"<cr>",
+          { noremap = true, desc = "Open Y Cscope" }
+        )
+        vim.keymap.set(
+          "n",
+          "<leader>Lc",
+          "<cmd>set tags=\"./.exvim.yproject/ctags\"<cr>",
+          { noremap = true, desc = "Open Y Ctags" }
+        )
         vim.keymap.set("v", "<leader>Da", require("dial.map").inc_visual(), { noremap = true, desc = "Increase" })
         vim.keymap.set("v", "<leader>Dx", require("dial.map").dec_visual(), { noremap = true, desc = "Descrease" })
         vim.keymap.set(
@@ -567,6 +603,18 @@ return {
           "<leader>Dgx",
           require("dial.map").dec_gvisual(),
           { noremap = true, desc = "Global descrease" }
+        )
+        vim.keymap.set(
+          "v",
+          "J",
+          ":m '>+1<CR>gv=gv",
+          { noremap = true, desc = "Visual Mode move line up" }
+        )
+        vim.keymap.set(
+          "v",
+          "K",
+          ":m '<-2<CR>gv=gv",
+          { noremap = true, desc = "Visual Mode move line down" }
         )
       end
     end,
@@ -604,5 +652,37 @@ return {
           augroup END
         ]]
     end,
+  },
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    opts = {
+      icons = { group = vim.g.icons_enabled and "" or "+", separator = "" },
+      disable = { filetypes = { "TelescopePrompt" } },
+    },
+    config = function()
+      require("which-key").setup(opts)
+      require("astrocore").which_key_register()
+    end,
+  },
+  {
+    "NStefan002/screenkey.nvim",
+    cmd = "Screenkey",
+    version = "*",
+    config = true,
+  },
+  {
+    "cbochs/grapple.nvim",
+    opts = {
+        scope = "git", -- also try out "git_branch"
+    },
+    event = { "BufReadPost", "BufNewFile" },
+    cmd = "Grapple",
+    keys = {
+        { "<leader>Mm", "<cmd>Grapple toggle<cr>", desc = "Grapple toggle tag" },
+        { "<leader>MM", "<cmd>Grapple toggle_tags<cr>", desc = "Grapple open tags window" },
+        { "<leader>Mn", "<cmd>Grapple cycle_tags next<cr>", desc = "Grapple cycle next tag" },
+        { "<leader>Mp", "<cmd>Grapple cycle_tags prev<cr>", desc = "Grapple cycle previous tag" },
+    },
   },
 }
