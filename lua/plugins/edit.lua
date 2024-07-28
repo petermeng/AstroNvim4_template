@@ -485,15 +485,13 @@ return {
 
       local wk_avail, wk = pcall(require, "which-key")
       if wk_avail then
-        wk.register {
-          ["<Leader>P"] = {
-            name = "Pommodoro",
-            w = { pc 'start("work")', "Start Pommodoro" },
-            s = { pc 'start("short_break")', "Short Break" },
-            l = { pc 'start("long_break")', "Long Break" },
-            p = { pc "toggle_pause()", "Toggle Pause" },
-            c = { pc "close()", "Close" },
-          },
+        wk.add {
+          { "<Leader>P", group = "Pommodoro" },
+          { "<Leader>Pc", "<Cmd>lua require('pommodoro-clock').close()<CR>", desc = "Close" },
+          { "<Leader>Pl", "<Cmd>lua require('pommodoro-clock').start(\"long_break\")<CR>", desc = "Long Break" },
+          { "<Leader>Pp", "<Cmd>lua require('pommodoro-clock').toggle_pause()<CR>", desc = "Toggle Pause" },
+          { "<Leader>Ps", "<Cmd>lua require('pommodoro-clock').start(\"short_break\")<CR>", desc = "Short Break" },
+          { "<Leader>Pw", "<Cmd>lua require('pommodoro-clock').start(\"work\")<CR>", desc = "Start Pommodoro" },
         }
       end
     end,
@@ -534,10 +532,8 @@ return {
       }
       local wk_avail, wk = pcall(require, "which-key")
       if wk_avail then
-        wk.register {
-          ["<Leader>D"] = {
-            name = "Dial",
-          },
+        wk.add {
+          { "<Leader>D", group = "Dial" },
         }
 
         vim.keymap.set("n", "<leader>Da", require("dial.map").inc_normal(), { noremap = true, desc = "Increase" })

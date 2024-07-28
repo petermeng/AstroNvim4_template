@@ -10,8 +10,8 @@ return {
   { import = "astrocommunity.pack.lua" },
   -- import/override with your plugins folder
   { import = "astrocommunity.pack.cpp" },
-  { import = "astrocommunity.project.nvim-spectre" },
-  { import = "astrocommunity.project.nvim-spectre" },
+  -- { import = "astrocommunity.project.nvim-spectre" },
+  -- { import = "astrocommunity.project.nvim-spectre" },
   { import = "astrocommunity.color.tint-nvim" },
   { import = "astrocommunity.motion.vim-matchup" },
 }

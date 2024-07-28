@@ -23,11 +23,11 @@ return {
     config = function()
       local wk_avail, wk = pcall(require, "which-key")
       if wk_avail then
-        wk.register {
-          ["<leader>T"] = {
-            name = "TagBar",
-            t = { "<cmd>TagbarToggle<CR>", "Tagbar toggle" },
-          },
+        wk.add {
+          {
+            { "<leader>T", group = "TagBar" },
+            { "<leader>Tt", "<cmd>TagbarToggle<CR>", desc = "Tagbar toggle" },
+          }
         }
       end
     end,
@@ -59,15 +59,15 @@ return {
       }
       local wk_avail, wk = pcall(require, "which-key")
       if wk_avail then
-        wk.register {
-          ["<Leader>G"] = {
-            name = "GotoPreview",
-            pd = { "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", "Preview definition" },
-            pt = { "<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>", "Preview Type definition" },
-            pi = { "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>", "Implementation" },
-            P = { "<cmd>lua require('goto-preview').close_all_win()<CR>", "Close all windows" },
-            pr = { "<cmd>lua require('goto-preview').goto_preview_references()<CR>", "References" },
-          },
+        wk.add {
+          {
+            { "<Leader>G", group = "GotoPreview" },
+            { "<Leader>GP", "<cmd>lua require('goto-preview').close_all_win()<CR>", desc = "Close all windows" },
+            { "<Leader>Gpd", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", desc = "Preview definition" },
+            { "<Leader>Gpi", "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>", desc = "Implementation" },
+            { "<Leader>Gpr", "<cmd>lua require('goto-preview').goto_preview_references()<CR>", desc = "References" },
+            { "<Leader>Gpt", "<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>", desc = "Preview Type definition" },
+          }
         }
       end
     end,
@@ -286,31 +286,18 @@ return {
       vim.keymap.set({ "n", "x" }, "<leader>rt", function() require("telescope").extensions.refactoring.refactors() end)
       local wk_avail, wk = pcall(require, "which-key")
       if wk_avail then
-        wk.register {
-          ["<Leader>R"] = {
-            name = "Refactoring",
-            e = { function() require("refactoring").refactor "Extract Function" end, "Extract Function", mode = "x" },
-            f = {
-              function() require("refactoring").refactor "Extract Function To File" end,
-              "Extract Function To File",
-              mode = "x",
-            },
-            v = { function() require("refactoring").refactor "Extract Variable" end, "Extract Variable", mode = "x" },
-            i = {
-              function() require("refactoring").refactor "Inline Variable" end,
-              "Inline Variable",
-              mode = { "x", "n" },
-            },
-            b = { function() require("refactoring").refactor "Extract Block" end, "Extract Variable", mode = "n" },
-            bf = {
-              function() require("refactoring").refactor "Extract Block To File" end,
-              "Extract Variable To File",
-              mode = "n",
-            },
-            r = {
-              function() require("telescope").extensions.refactoring.refactors() end,
-              "Telescope",
-              mode = { "n", "x" },
+        wk.add {
+          {
+            { "<Leader>R", group = "Refactoring" },
+            { "<Leader>Rb", function() require("refactoring").refactor "Extract Block" end, desc = "Extract Variable" },
+            { "<Leader>Rbf", function() require("refactoring").refactor "Extract Block To File" end, desc = "Extract Variable To File" },
+            { "<Leader>Ri", function() require("refactoring").refactor "Inline Variable" end, desc = "Inline Variable", mode = { "n", "x" } },
+            { "<Leader>Rr", function() require("telescope").extensions.refactoring.refactors() end, desc = "Telescope", mode = { "n", "x" } },
+            {
+              mode = { "x" },
+              { "<Leader>Re", function() require("refactoring").refactor "Extract Function" end, desc = "Extract Function" },
+              { "<Leader>Rf", function() require("refactoring").refactor "Extract Function To File" end, desc = "Extract Function To File" },
+              { "<Leader>Rv", function() require("refactoring").refactor "Extract Variable" end, desc = "Extract Variable" },
             },
           },
         }
