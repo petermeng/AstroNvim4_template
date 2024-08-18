@@ -27,7 +27,7 @@ return {
           {
             { "<leader>T", group = "TagBar" },
             { "<leader>Tt", "<cmd>TagbarToggle<CR>", desc = "Tagbar toggle" },
-          }
+          },
         }
       end
     end,
@@ -63,11 +63,23 @@ return {
           {
             { "<Leader>G", group = "GotoPreview" },
             { "<Leader>GP", "<cmd>lua require('goto-preview').close_all_win()<CR>", desc = "Close all windows" },
-            { "<Leader>Gpd", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", desc = "Preview definition" },
-            { "<Leader>Gpi", "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>", desc = "Implementation" },
+            {
+              "<Leader>Gpd",
+              "<cmd>lua require('goto-preview').goto_preview_definition()<CR>",
+              desc = "Preview definition",
+            },
+            {
+              "<Leader>Gpi",
+              "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>",
+              desc = "Implementation",
+            },
             { "<Leader>Gpr", "<cmd>lua require('goto-preview').goto_preview_references()<CR>", desc = "References" },
-            { "<Leader>Gpt", "<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>", desc = "Preview Type definition" },
-          }
+            {
+              "<Leader>Gpt",
+              "<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>",
+              desc = "Preview Type definition",
+            },
+          },
         }
       end
     end,
@@ -290,14 +302,40 @@ return {
           {
             { "<Leader>R", group = "Refactoring" },
             { "<Leader>Rb", function() require("refactoring").refactor "Extract Block" end, desc = "Extract Variable" },
-            { "<Leader>Rbf", function() require("refactoring").refactor "Extract Block To File" end, desc = "Extract Variable To File" },
-            { "<Leader>Ri", function() require("refactoring").refactor "Inline Variable" end, desc = "Inline Variable", mode = { "n", "x" } },
-            { "<Leader>Rr", function() require("telescope").extensions.refactoring.refactors() end, desc = "Telescope", mode = { "n", "x" } },
+            {
+              "<Leader>Rbf",
+              function() require("refactoring").refactor "Extract Block To File" end,
+              desc = "Extract Variable To File",
+            },
+            {
+              "<Leader>Ri",
+              function() require("refactoring").refactor "Inline Variable" end,
+              desc = "Inline Variable",
+              mode = { "n", "x" },
+            },
+            {
+              "<Leader>Rr",
+              function() require("telescope").extensions.refactoring.refactors() end,
+              desc = "Telescope",
+              mode = { "n", "x" },
+            },
             {
               mode = { "x" },
-              { "<Leader>Re", function() require("refactoring").refactor "Extract Function" end, desc = "Extract Function" },
-              { "<Leader>Rf", function() require("refactoring").refactor "Extract Function To File" end, desc = "Extract Function To File" },
-              { "<Leader>Rv", function() require("refactoring").refactor "Extract Variable" end, desc = "Extract Variable" },
+              {
+                "<Leader>Re",
+                function() require("refactoring").refactor "Extract Function" end,
+                desc = "Extract Function",
+              },
+              {
+                "<Leader>Rf",
+                function() require("refactoring").refactor "Extract Function To File" end,
+                desc = "Extract Function To File",
+              },
+              {
+                "<Leader>Rv",
+                function() require("refactoring").refactor "Extract Variable" end,
+                desc = "Extract Variable",
+              },
             },
           },
         }
@@ -418,10 +456,10 @@ return {
     end,
   },
   {
-    'm-demare/hlargs.nvim',
+    "m-demare/hlargs.nvim",
     config = function()
-      require('hlargs').setup {
-        color = '#ef9062',
+      require("hlargs").setup {
+        color = "#ef9062",
         highlight = {},
         -- excluded_filetypes = {},
         -- disable = function(lang, bufnr) -- If changed, `excluded_filetypes` will be ignored
@@ -431,7 +469,7 @@ return {
         paint_arg_usages = true,
         paint_catch_blocks = {
           declarations = false,
-          usages = false
+          usages = false,
         },
         extras = {
           named_parameters = false,
@@ -440,9 +478,9 @@ return {
         excluded_argnames = {
           declarations = {},
           usages = {
-            python = { 'self', 'cls' },
-            lua = { 'self' }
-          }
+            python = { "self", "cls" },
+            lua = { "self" },
+          },
         },
         performance = {
           parse_delay = 1,
@@ -453,10 +491,23 @@ return {
             partial_parse = 3,
             partial_insert_mode = 100,
             total_parse = 700,
-            slow_parse = 5000
-          }
+            slow_parse = 5000,
+          },
         },
       }
     end,
+  },
+  {
+    "mistricky/codesnap.nvim",
+    build = "make",
+    keys = {
+      { "<leader>rC", "<Esc><cmd>CodeSnap<cr>", mode = "x", desc = "Save selected code snapshot into clipboard" },
+      { "<leader>rS", "<Esc><cmd>CodeSnapSave<cr>", mode = "x", desc = "Save selected code snapshot in ~/Pictures" },
+    },
+    opts = {
+      save_path = "~/Pictures",
+      has_breadcrumbs = true,
+      bg_theme = "bamboo",
+    },
   },
 }
