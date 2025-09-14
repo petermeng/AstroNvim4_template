@@ -129,4 +129,70 @@ return {
       },
     },
   },
+  -- Lazy
+  {
+    "2kabhishek/tdo.nvim",
+    dependencies = "2kabhishek/pickme.nvim",
+    cmd = { "Tdo" },
+    keys = { "<leader>nn", "<leader>nt", "<leader>nx", "[t", "]t" }, -- Add more keybindings you need for lazy loading
+    config = function()
+      local tdo = require "tdo"
+      tdo.setup {
+        add_default_keybindings = true, -- Add default keybindings for the plugin
+        completion = {
+          offsets = {}, -- Custom offsets / date expressions for completion
+          ignored_files = { "README.md", "templates" }, -- Files/directories to ignore in completions
+        },
+        cache = { -- You don't really need to change these
+          timeout = 5000, -- Completion cache timeout in milliseconds
+          max_entries = 100, -- Maximum number of cached completion entries
+        },
+        lualine = { -- Only used for lualine integration
+          update_frequency = 300, -- How frequently to update the pending todo count in lualine
+          only_show_in_notes = false, -- Whether to show the lualine component only in notes buffers
+        },
+      }
+    end,
+  },
+  {
+    "2kabhishek/markit.nvim",
+    dependencies = { "2kabhishek/pickme.nvim" },
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      require("markit").setup {
+        -- whether to add comprehensive default keybindings. default true
+        add_default_keybindings = true,
+        -- which builtin marks to show. default {}
+        builtin_marks = { ".", "<", ">", "^" },
+        -- whether movements cycle back to the beginning/end of buffer. default true
+        cyclic = true,
+        -- whether the shada file is updated after modifying uppercase marks. default false
+        force_write_shada = false,
+        -- how often (in ms) to redraw signs/recompute mark positions.
+        -- higher value means better performance but may cause visual lag,
+        -- while lower value may cause performance penalties. default 150.
+        refresh_interval = 150,
+        -- sign priorities for each type of mark - builtin marks, uppercase marks, lowercase
+        -- marks, and bookmarks.
+        -- can be either a table with all/none of the keys, or a single number, in which case
+        -- the priority applies to all marks.
+        -- default 10.
+        sign_priority = { lower = 10, upper = 15, builtin = 8, bookmark = 20 },
+        -- disables mark tracking for specific filetypes. default {}
+        excluded_filetypes = {},
+        -- disables mark tracking for specific buftypes. default {}
+        excluded_buftypes = {},
+        -- bookmark groups configuration
+        bookmarks = {
+          {
+            sign = "⚑", -- string: sign character to display (empty string to disable)
+            virt_text = "hello", -- string: virtual text to show at end of line
+            annotate = false, -- boolean: whether to prompt for annotation when setting bookmark
+          },
+          { sign = "!", virt_text = "", annotate = false },
+          { sign = "@", virt_text = "", annotate = true },
+        },
+      }
+    end,
+  },
 }
