@@ -16,7 +16,7 @@ return {
           "clangd",
           "--background-index",
           "--background-index-priority=background", -- don't outrank the test tooling
-          "--head-insertion=never", -- per-CPU header variants: auto-insert guesses wrong
+          "--header-insertion=never", -- per-CPU header variants: auto-insert guesses wrong
           "--completion-style=detailed",
           "--pch-storage=" .. pch,
           "-j=" .. jobs,
