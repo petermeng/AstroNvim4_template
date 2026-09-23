@@ -5,8 +5,8 @@ return {
   opts = {
     status = {
       components = {
-        mode = { mode_text = { padding = { left = 1, right = 1} } },
-      }
+        mode = { mode_text = { padding = { left = 1, right = 1 } } },
+      },
     },
   },
 }
